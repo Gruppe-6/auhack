@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Banking
 {
     public class Customer
     {
-        private List<Account> _accounts;
+        public List<Account> _accounts;
         private int _id;
         private string _name;
         private AccountReaderCSV accountReaderCsv;
@@ -17,6 +15,7 @@ namespace Banking
             _id = id;
             _name = name;
             accountReaderCsv = new AccountReaderCSV();
+            _accounts = new List<Account>();
         }
 
         public void AddAccount(string name, string file)
