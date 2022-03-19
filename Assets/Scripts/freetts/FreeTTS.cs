@@ -44,6 +44,7 @@ public class FreeTTS : MonoBehaviour
         UnityWebRequest create_audio_request = UnityWebRequest.Get(url);
         yield return create_audio_request.SendWebRequest();
 
+        #pragma warning disable 0618
         if (create_audio_request.isNetworkError || create_audio_request.isHttpError)
         {
             Debug.LogError(string.Format("Error: {0}", create_audio_request.error));
