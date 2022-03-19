@@ -1,0 +1,4 @@
+Stein Bagger;
+Budget; budget.csv; 1000;
+Current; current.csv; -500; 
+Savings; savings.csv; 5000;

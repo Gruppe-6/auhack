@@ -29,6 +29,7 @@
 ExportedObj/
 .consulo/
 .DS_Store
+*.idea/
 *.csproj
 *.unityproj
 *.sln
@@ -59,3 +60,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+Assets/.idea
+Assets/Scripts/.idea
