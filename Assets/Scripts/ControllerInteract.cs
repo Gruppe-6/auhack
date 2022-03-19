@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ContollerInteract : MonoBehaviour
+public class ControllerInteract : MonoBehaviour
 {
     public enum ControllerButton : byte
     {
@@ -14,6 +14,8 @@ public class ContollerInteract : MonoBehaviour
     public float Timer;
     private Image img;
     public ControllerButton HighlightButton;
+
+    public bool Chosen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,7 @@ public class ContollerInteract : MonoBehaviour
         {
             img.fillAmount += Time.deltaTime * (1 / Timer);
             if (img.fillAmount == 1)
-                Debug.Log("Clicked");
+                Chosen = true;
         }
         else
             img.fillAmount -= Time.deltaTime *  (3 / Timer);
