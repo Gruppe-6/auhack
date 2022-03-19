@@ -35,10 +35,10 @@ public class DialogChoice : MonoBehaviour
         RT = Right.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>();
         QT = Question.GetComponent<TextMeshProUGUI>();
 
-        L = (Left.transform.position, Left.transform.position + new Vector3(-30, -30, -80));
-        M = (Middle.transform.position, Middle.transform.position + new Vector3(0, -30, -80));
-        R = (Right.transform.position, Right.transform.position + new Vector3(30, -30, -80));
-        Q = (Question.transform.position, Question.transform.position + new Vector3(0, 40, -80));
+        L = (Left.transform.position, Left.transform.position + new Vector3(-200, -200, -400));
+        M = (Middle.transform.position, Middle.transform.position + new Vector3(0, -200, -400));
+        R = (Right.transform.position, Right.transform.position + new Vector3(200, -200, -400));
+        Q = (Question.transform.position, Question.transform.position + new Vector3(0, 400, -700));
 
         Left.transform.position = L.Out;
         Middle.transform.position = M.Out;
@@ -113,11 +113,12 @@ public class DialogChoice : MonoBehaviour
         {
             if (Left.GetComponent<ControllerInteract>().Chosen)
                 return 1;
-            if (Middle.GetComponent<ControllerInteract>().Chosen)
+            else if (Middle.GetComponent<ControllerInteract>().Chosen)
                 return 2;
-            if (Right.GetComponent<ControllerInteract>().Chosen)
+            else if (Right.GetComponent<ControllerInteract>().Chosen)
                 return 3;
-            return 0;
+            else
+                return 0;
         });
     }
     IEnumerator WaitUntilTrue(Func<byte> checkMethod)
