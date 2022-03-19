@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 
@@ -14,13 +13,14 @@ namespace Banking
         {
             AccountName = accountName;
         }
-        
-        public void GetTransactions(decimal balance, List<Transaction> transactions)
+        public string GetTransactions()
         {
+            string transactions = "";
             foreach (Transaction transaction in Transactions)
             {
-                transaction.ToString();
+                 transactions += transaction.ToString();
             }
+            return transactions;
         }
 
         public void NewTransaction(DateTime dateTime, string category, decimal amount)

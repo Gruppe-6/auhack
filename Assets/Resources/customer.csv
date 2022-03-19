@@ -1,4 +1,4 @@
-Stein Bagger;
-Budget; budget.csv; 1000;
-Current; current.csv; -500; 
-Savings; savings.csv; 5000;
+Erik Larsen;
+Budget;Assets/Resources/budget.csv; 1000;
+Current;Assets/Resources/current.csv; -500; 
+Savings;Assets/Resources/savings.csv; 5000;

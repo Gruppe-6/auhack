@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
 
 namespace Banking
 {
-    public class Bank
+    public class Bank : MonoBehaviour
     {
-
-        private List<Customer> _customers;
+        [SerializeField] private List<Customer> _customers;
         private int _customerId = 0;
 
-        public Bank(string file)
+        private void Awake()
         {
-            AddCustomer(file);
+            AddCustomer("Assets/Resources/customer.csv");
         }
 
         public void AddCustomer(string file)
@@ -20,13 +20,12 @@ namespace Banking
             string customerInformation = File.ReadLines(file).First();
             string[] infoFields = customerInformation.Split(';');
             _customers = new List<Customer>() {new Customer(_customerId, infoFields[0])};
-            
             foreach (var line in File.ReadLines(file))
             {
-                if (line == File.ReadLines(file).First()) break;
+                if (line == File.ReadLines(file).First()) continue;
                 string[] accountInfo = line.Split(';');
                 
-                _customers.Last().AddAccount(infoFields[0], infoFields[1]);
+                _customers.Last().AddAccount(accountInfo[0], accountInfo[1]);
             }
         }
     }

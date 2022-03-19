@@ -24,13 +24,13 @@ public class ControllerInteract : MonoBehaviour
         switch (HighlightButton)
         {
             case ControllerButton.Right:
-                transform.Find("Right").GetComponent<SpriteRenderer>().enabled = true;
+                transform.Find("Right").GetComponent<Image>().enabled = true;
                 break;
             case ControllerButton.Middle:
-                transform.Find("Middle").GetComponent<SpriteRenderer>().enabled = true;
+                transform.Find("Middle").GetComponent<Image>().enabled = true;
                 break;
             case ControllerButton.Left:
-                transform.Find("Left").GetComponent<SpriteRenderer>().enabled = true;
+                transform.Find("Left").GetComponent<Image>().enabled = true;
                 break;
             case ControllerButton.None:
             default:
