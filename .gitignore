@@ -60,3 +60,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+Assets/.idea
+Assets/Scripts/.idea
