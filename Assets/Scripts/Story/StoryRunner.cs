@@ -14,34 +14,26 @@ public interface IStoryPart
 
 public class StoryRunner : MonoBehaviour
 {
-    Queue<IStoryPart> storyParts;
-    IStoryPart currentStoryPart;
+    List<StoryPart> storyParts = new List<StoryPart>();
+    StoryPart currentStoryPart;
     private static bool created = false;
-
-    // Start is called before the first frame update
-    void Start() {
-        storyParts = new Queue<IStoryPart>();
-        currentStoryPart = null;
-    }
-
+    [SerializeField] private FreeTTS jan;
+    [SerializeField] private DialogChoice dc;
+    
     void Awake()
     {
         if (!created)
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
             created = true;
-            Debug.Log("Awake: " + this.gameObject);
+            Debug.Log("Awake: " + gameObject);
+            AddStoryPart(new InitialStory(jan, dc));
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-    
-    public void AddStoryPart(IStoryPart storyPart) {
-        storyParts.Enqueue(storyPart);
-        if (currentStoryPart == null && storyParts.Count == 0) {
+    public void AddStoryPart(StoryPart storyPart) {
+        storyParts.Add(storyPart);
+        if (currentStoryPart == null && storyParts.Count != 0) {
             RunNextStory();
         }
     }
@@ -50,10 +42,11 @@ public class StoryRunner : MonoBehaviour
         if (currentStoryPart != null)
         {
             currentStoryPart.RemoveOnCompleteHandler(RunNextStory);
+            storyParts.RemoveAt(0);
         }
         
         if (storyParts.Count > 0) {
-            currentStoryPart = storyParts.Dequeue();
+            currentStoryPart = storyParts[0];
             currentStoryPart.AddOnCompleteHandler(RunNextStory);
             currentStoryPart.RunStory();
         }

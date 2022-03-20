@@ -20,11 +20,9 @@ public class FreeTTS : MonoBehaviour
     AudioSource audioData;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
         audioData = GetComponent<AudioSource>();
-        StartCoroutine(PlayTTS("The red sun in the sky"));
     }
 
     // Update is called once per frame
@@ -33,7 +31,7 @@ public class FreeTTS : MonoBehaviour
         
     }
 
-    IEnumerator PlayTTS(string message, string language = "en-GB", string voice_name = "Amy_Female", string id = "Amy")
+    public IEnumerator PlayTTS(string message, string language = "en-GB", string voice_name = "Amy_Female", string id = "Amy")
     {
         var url = "https://freetts.com/Home/PlayAudio?" + 
             "Language=" + UnityWebRequest.EscapeURL(language) + 
