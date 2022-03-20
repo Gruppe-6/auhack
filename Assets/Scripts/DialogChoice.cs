@@ -8,7 +8,7 @@ using TMPro;
 public class DialogChoice : MonoBehaviour
 {
     private GameObject Left, Middle, Right, Question;
-    private TextMeshProUGUI LT, MT, RT, QT;
+    [SerializeField] private TextMeshProUGUI LT, MT, RT, QT;
     public float TimeToSelect;
 
     private (Vector3 In, Vector3 Out) L, M, R, Q;
@@ -30,10 +30,10 @@ public class DialogChoice : MonoBehaviour
         Right.GetComponent<ControllerInteract>().Timer = TimeToSelect;
         Question = transform.Find("Question").gameObject;
 
-        LT = Left.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>();
+        /*LT = Left.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>();
         MT = Middle.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>();
         RT = Right.transform.Find("Text").gameObject.GetComponent<TextMeshProUGUI>();
-        QT = Question.GetComponent<TextMeshProUGUI>();
+        QT = Question.GetComponent<TextMeshProUGUI>();*/
 
         L = (Left.transform.position, Left.transform.position + new Vector3(-200, -200, -400));
         M = (Middle.transform.position, Middle.transform.position + new Vector3(0, -200, -400));
@@ -46,7 +46,7 @@ public class DialogChoice : MonoBehaviour
         Question.transform.position = Q.Out;
         _in = false;
         //_move = true;
-        StartCoroutine(Test());
+        //StartCoroutine(Test());
     }
 
     // Update is called once per frame
@@ -96,27 +96,39 @@ public class DialogChoice : MonoBehaviour
         Question.SetActive(state);
     }
 
-    public void AskQuestion(string q, string op1, string op2, string op3)
+    public void AskQuestion(string q, string op1, string op2, string op3, Action<int> callback)
     {
         LT.text = op1;
         MT.text = op2;
         RT.text = op3;
         QT.text = q;
         _move = true;
-        StartCoroutine(HandleQuestion());
+        print(callback);
+        StartCoroutine(HandleQuestion(callback));
     }
 
-    IEnumerator HandleQuestion()
+    //public void AskQuestion(string[] lines) => AskQuestion(lines[0], lines[1], lines[2], lines[3]);
+
+    IEnumerator HandleQuestion(Action<int> onDecision)
     {
         Answer = 0;
         yield return WaitUntilTrue(() =>
         {
             if (Left.GetComponent<ControllerInteract>().Chosen)
+            {
+                onDecision(1);
                 return 1;
+            }
             else if (Middle.GetComponent<ControllerInteract>().Chosen)
+            {
+                onDecision(2);
                 return 2;
+            }
             else if (Right.GetComponent<ControllerInteract>().Chosen)
+            {
+                onDecision(2);
                 return 3;
+            }
             else
                 return 0;
         });
@@ -135,10 +147,10 @@ public class DialogChoice : MonoBehaviour
         Debug.Log(Answer);
     }
 
-    IEnumerator Test()
+    /*IEnumerator Test()
     {
         yield return new WaitForSeconds(5);
-        AskQuestion("Er du gay?", "Ja", "Måske", "Nej");
+        AskQuestion("Er du stray?", "Ja", "Måske", "Nej");
         yield return 0;
-    }
+    }*/
 }

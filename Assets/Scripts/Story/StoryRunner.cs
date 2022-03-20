@@ -18,6 +18,7 @@ public class StoryRunner : MonoBehaviour
     StoryPart currentStoryPart;
     private static bool created = false;
     [SerializeField] private FreeTTS jan;
+    [SerializeField] private DialogChoice dc;
     
     void Awake()
     {
@@ -26,7 +27,7 @@ public class StoryRunner : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             created = true;
             Debug.Log("Awake: " + gameObject);
-            AddStoryPart(new InitialStory(jan));
+            AddStoryPart(new InitialStory(jan, dc));
         }
     }
 
